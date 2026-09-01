@@ -2,6 +2,8 @@
 
 # Untuk file mainnya silahkan buka folder main/iwjgl3, lalu buka folder Player/src file mainnya disana bang
 
+</>
+
 package frontend;
 
 public class Main {
@@ -31,6 +33,7 @@ public class Main {
     }
 }
 
+</>
 
 
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
