@@ -1,6 +1,6 @@
 # Rodinal Mukhtar Aulya_OOP_FE
 
-## Untuk file mainnya silahlan buka folder main/iwjgl3, lalu buka folder Player/src file mainnya disana bang
+# Untuk file mainnya silahlan buka folder main/iwjgl3, lalu buka folder Player/src file mainnya disana bang
 
 
 
