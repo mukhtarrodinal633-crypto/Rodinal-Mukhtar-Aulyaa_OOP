@@ -2,7 +2,8 @@ package frontend;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("=========================================================");
+        System.out.println("=== TOUHOU OOP PRACTICUM - MODULE 1: BASIC CLASSES & OBJECT INTERACTION ===");
+
 
         Player reimu = new Player("Reimu Hakurei", 100, 15, 3);
         Enemy fairyBoss = new Enemy("Cirno (Stage 2 Boss)", 50);
