@@ -1,10 +1,10 @@
-package frontend;
+package com.nama.frontend;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("=== TOUHOU OOP PRACTICUM - MODULE 1: BASIC CLASSES & OBJECT INTERACTION ===");
 
-
+        // Instantiating objects (Player and Enemy)
         Player reimu = new Player("Reimu Hakurei", 100, 15, 3);
         Enemy fairyBoss = new Enemy("Cirno (Stage 2 Boss)", 50);
 

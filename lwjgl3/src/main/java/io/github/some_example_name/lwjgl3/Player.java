@@ -1,10 +1,10 @@
-package frontend;
+package com.nama.frontend;
 
 public class Player {
-    public String name;
-    public int hp;
-    public int power;
-    public int spellCards;
+    String name;
+    int hp;
+    int power;
+    int spellCards;
 
     public Player(String name, int hp, int power, int spellCards) {
         this.name = name;
@@ -14,34 +14,28 @@ public class Player {
     }
 
     public void takeDamage(int damage) {
-        this.hp -= damage;
+        hp -= damage;
 
-        if (this.hp < 0) {
-            this.hp = 0;
+        if (hp < 0) {
+            hp = 0;
         }
 
-        if (this.hp > 0) {
-            System.out.println(this.name + " took " + damage + " damage! Remaining HP: " + this.hp);
+        if (hp > 0) {
+            System.out.println(name + " took " + damage + " damage! Remaining HP: " + hp);
         } else {
-            System.out.println(this.name + " took " + damage + " damage! Remaining HP: 0");
-            System.out.println(this.name + " was defeated!");
+            System.out.println(name + " was defeated!");
         }
     }
 
     public void shoot(Enemy target) {
-        int damage = this.power + 10;
-        System.out.println(this.name + " shoots " + target.name + " dealing " + damage + " DMG!");
+        int damage = 10 + power;
+
+        System.out.println(name + " shoots " + target.name + " dealing " + damage + " DMG!");
+
         target.takeDamage(damage);
     }
 
     public boolean isAlive() {
-        return this.hp > 0;
-    }
-
-    public void tampilkanData() {
-        System.out.println("Name       : " + name);
-        System.out.println("HP         : " + hp);
-        System.out.println("Power      : " + power);
-        System.out.println("SpellCards : " + spellCards);
+        return hp > 0;
     }
 }

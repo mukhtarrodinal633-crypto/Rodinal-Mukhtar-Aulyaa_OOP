@@ -1,9 +1,9 @@
-package frontend;
+package com.nama.frontend;
 
 public class Enemy {
-    public String name;
-    public int hp;
-    public int maxHp;
+    String name;
+    int hp;
+    int maxHp;
 
     public Enemy(String name, int hp) {
         this.name = name;
@@ -12,25 +12,26 @@ public class Enemy {
     }
 
     public void takeDamage(int damage) {
-        this.hp -= damage;
+        hp -= damage;
 
-        if (this.hp < 0) {
-            this.hp = 0;
+        if (hp < 0) {
+            hp = 0;
         }
 
-        System.out.println(this.name + " took " + damage + " damage! HP: " + this.hp + "/" + this.maxHp);
+        System.out.println(name + " took " + damage + " damage! HP: " + hp + "/" + maxHp);
 
-        if (this.hp == 0) {
-            System.out.println(this.name + " was defeated!");
+        if (hp == 0) {
+            System.out.println(name + " was defeated!");
         }
     }
 
     public void attack(Player player, int damage) {
-        System.out.println(this.name + " unleashes bullet barrage on " + player.name + "!");
+        System.out.println(name + " unleashes bullet barrage on " + player.name + "!");
+
         player.takeDamage(damage);
     }
 
     public boolean isAlive() {
-        return this.hp > 0;
+        return hp > 0;
     }
 }
