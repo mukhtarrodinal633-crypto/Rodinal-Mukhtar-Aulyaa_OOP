@@ -1,37 +1,17 @@
 package com.nama.frontend;
 
 public class Enemy {
-    String name;
-    int hp;
-    int maxHp;
+    public void TakeDamage (int Damage){
+        hp == 50
+        TakeDamage -=25;
 
-    public Enemy(String name, int hp) {
-        this.name = name;
-        this.hp = hp;
-        this.maxHp = hp;
+        double TakeDamage = 50 - 25;
+        System.out.println("Cirno" + TakeDamage);
     }
+    public void Attack (Player player, int Damage){
+        int EnemyCirno = 30;
+        int PlayerReimuHakurei = 100 - EnemyCirno;
 
-    public void takeDamage(int damage) {
-        hp -= damage;
-
-        if (hp < 0) {
-            hp = 0;
-        }
-
-        System.out.println(name + " took " + damage + " damage! HP: " + hp + "/" + maxHp);
-
-        if (hp == 0) {
-            System.out.println(name + " was defeated!");
-        }
-    }
-
-    public void attack(Player player, int damage) {
-        System.out.println(name + " unleashes bullet barrage on " + player.name + "!");
-
-        player.takeDamage(damage);
-    }
-
-    public boolean isAlive() {
-        return hp > 0;
+        System.out.println("Reimu Hakurei took 30 damage!" + PlayerReimuHakurei);
     }
 }
