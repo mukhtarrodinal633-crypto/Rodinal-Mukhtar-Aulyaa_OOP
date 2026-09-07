@@ -1,12 +1,12 @@
 # Rodinal Mukhtar Aulya_OOP_FE
 
-# Untuk file mainnya silahkan buka folder main/iwjgl3 lalu lanjut ke player/src
+# Untuk file mainnya silahkan buka folder main/iwjgl3 setelah dibuka dibawahnya ada file dari Testnya. Lalu lanjut ke player/src
 
 ```
 
 package frontend;
 
-public class Main {
+public class Test {
     public static void main(String[] args) {
         System.out.println("=== TOUHOU OOP PRACTICUM - MODULE 1: BASIC CLASSES & OBJECT INTERACTION ===");
 
