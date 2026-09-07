@@ -30,4 +30,29 @@ public class Enemy {
     public boolean isAlive() {
         return this.hp > 0;
     }
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public int getMaxHp(){
+        return maxHp;
+    }
+    public int getScoreValue(){
+        return scoreValue;
+    }
+    public void setScoreValue(int scoreValue){
+        this.scoreValue = scoreValue;
+    }
+    public int getHp(){
+        return hp;
+    }
+    public void setHp(int hp) {
+        this.hp = Math.max(0, hp);
+    }
+    public boolean takeDamage(int damage){
+        setHp(getHp() - damage);
+        return getHp() <= 0;
+    }
 }
