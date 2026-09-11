@@ -1,41 +1,5 @@
 # Rodinal Mukhtar Aulya_OOP_FE
 
-# Untuk file mainnya silahkan buka folder main/iwjgl3 setelah dibuka dibawahnya ada file dari Testnya. Lalu lanjut ke player/src
-
-```
-
-package frontend;
-
-public class Test {
-    public static void main(String[] args) {
-        System.out.println("=== TOUHOU OOP PRACTICUM - MODULE 1: BASIC CLASSES & OBJECT INTERACTION ===");
-
-        Player reimu = new Player("Reimu Hakurei", 100, 15, 3);
-        Enemy fairyBoss = new Enemy("Cirno (Stage 2 Boss)", 50);
-
-        System.out.println("\n--- Initial Battle State ---");
-        System.out.println("Player: " + reimu.name + " | HP: " + reimu.hp + " | Power: " + reimu.power + " | SpellCards: " + reimu.spellCards);
-        System.out.println("Enemy:  " + fairyBoss.name + " | HP: " + fairyBoss.hp);
-
-        System.out.println("\n--- Turn 1: Player Shoots Enemy ---");
-        reimu.shoot(fairyBoss);
-
-        System.out.println("\n--- Turn 2: Enemy Counter-attacks ---");
-        fairyBoss.attack(reimu, 30);
-
-        System.out.println("\n--- Turn 3: Player Shoots Enemy Finishing Blow ---");
-        reimu.shoot(fairyBoss);
-
-        System.out.println("\n--- Turn 4: Enemy Deals Fatal Damage to Reimu ---");
-        fairyBoss.attack(reimu, 80);
-
-        System.out.println("\n=== Battle Simulation Complete ===");
-    }
-}
-
-```
-
-
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
 
 This project was generated with a template including simple application launchers and an `ApplicationAdapter` extension that draws libGDX logo.
@@ -61,7 +25,7 @@ Useful Gradle tasks and flags:
 - `clean`: removes `build` folders, which store compiled classes and built archives.
 - `eclipse`: generates Eclipse project data.
 - `idea`: generates IntelliJ project data.
-- `lwjgl3:jar`: builds application's runnable jar, which can be found at `Main/lwjgl3/build/libs`.
+- `lwjgl3:jar`: builds application's runnable jar, which can be found at `lwjgl3/build/libs`.
 - `lwjgl3:run`: starts the application.
 - `test`: runs unit tests (if any).
 
