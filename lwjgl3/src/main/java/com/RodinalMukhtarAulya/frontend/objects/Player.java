@@ -1,8 +1,12 @@
 package com.RodinalMukhtarAulya.frontend.objects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.RodinalMukhtarAulya.frontend.enemies.Enemy;
 import com.RodinalMukhtarAulya.frontend.items.Item;
+
+import static com.badlogic.gdx.Gdx.input;
 
 public class Player extends GameObject {
     public String name;
@@ -10,6 +14,8 @@ public class Player extends GameObject {
     public int power;
     public int spellCards;
     private long score;
+    private boolean up, down, left, right;
+
 
     public Player(String name, int hp, int power, int spellCards) {
         super(280, 40, 32, 32, 0, Color.RED);
@@ -78,4 +84,29 @@ public class Player extends GameObject {
     public void setSpellCards(int spellCards) { this.spellCards = spellCards; }
 
     public long getScore() { return score; }
+
+    @Override
+    public void update(float delta) {
+        if (input != null) {
+            // TODO: Cek input W / UP   → y += speed * delta{
+                Gdx.input.isKeyPressed(Input.Keys.W);
+                    y += speed * delta;
+                // TODO: Cek input S / DOWN → y -= speed * delta
+                input.isKeyPressed(Input.Keys.S);
+                    y -= speed * delta;
+                // TODO: Cek input A / LEFT → x -= speed * delta
+                Gdx.input.isKeyPressed(Input.Keys.A);
+                    x -= speed * delta;
+                // TODO: Cek input D / RIGHT → x += speed * delta
+                Gdx.input.isKeyPressed(Input.Keys.D);
+                    x += speed * delta;
+        }
+    }
+    @Override
+    public void onCollision(Collidable other) {
+        // TODO: Cek apakah other yang diterima method ini adalah Player
+        // Item pickup is handled on the Player side via collectItem()
+    }
+
+
 }

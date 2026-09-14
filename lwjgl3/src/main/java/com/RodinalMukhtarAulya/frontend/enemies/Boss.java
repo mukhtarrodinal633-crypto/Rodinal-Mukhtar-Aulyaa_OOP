@@ -10,4 +10,9 @@ public class Boss extends Enemy {
     public Boss(float x, float y, String name, int hp) {
         super(x, y, 48, 48, Color.BLUE, name, hp, 5000L);
     }
+    @Override
+    public void onCollision(Collidable other) {
+        // TODO: Cek apakah other yang diterima method ini adalah Player
+        // TODO: Cetak "Player touches boss"
+    }
 }
