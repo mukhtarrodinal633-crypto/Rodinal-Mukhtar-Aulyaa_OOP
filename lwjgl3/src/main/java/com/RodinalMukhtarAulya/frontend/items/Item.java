@@ -1,5 +1,6 @@
 package com.RodinalMukhtarAulya.frontend.items;
 
+import com.RodinalMukhtarAulya.frontend.objects.Collidable;
 import com.RodinalMukhtarAulya.frontend.objects.GameObject;
 import com.badlogic.gdx.graphics.Color;
 
@@ -7,6 +8,7 @@ public class Item extends GameObject {
     private String itemType;
     private long scoreValue;
     private ItemType itemTypeEnum;
+    private boolean collected = false;
 
     public Item(float x, float y, String itemType) {
         super(x, y, 16, 16, 100f, Color.WHITE);
@@ -42,11 +44,31 @@ public class Item extends GameObject {
         this.y -= speed * delta;
     }
 
-    public String getItemType() { return itemType; }
-    public long getScoreValue() { return scoreValue; }
-    public void setScoreValue(long scoreValue) { this.scoreValue = scoreValue; }
+    public String getItemType() {
+        return itemType;
+    }
+
+    public long getScoreValue() {
+        return scoreValue;
+    }
+
+    public void setScoreValue(long scoreValue) {
+        this.scoreValue = scoreValue;
+    }
 
     public ItemType getItemTypeEnum() {
         return itemTypeEnum;
+    }
+
+    public boolean isCollected() {
+        return collected;
+    }
+
+    public void setCollected(boolean collected) {
+        this.collected = collected;
+    }
+
+    @Override
+    public void onCollision(Collidable other) {
     }
 }

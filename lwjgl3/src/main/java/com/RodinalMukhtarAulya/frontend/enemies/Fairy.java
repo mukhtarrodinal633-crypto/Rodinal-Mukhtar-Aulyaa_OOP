@@ -1,9 +1,12 @@
 package com.RodinalMukhtarAulya.frontend.enemies;
 
 import com.RodinalMukhtarAulya.frontend.objects.Collidable;
+import com.RodinalMukhtarAulya.frontend.objects.Player;
 import com.badlogic.gdx.graphics.Color;
 
 public class Fairy extends Enemy {
+    private float collisionCooldown = 0;
+
     public Fairy(String name, int hp) {
         super(150, 380, 24, 24, Color.PINK, name, hp, 500L);
     }
@@ -13,10 +16,19 @@ public class Fairy extends Enemy {
     }
 
     @Override
-    public void onCollision(Collidable other) {
-        // TODO: Cek apakah other yang diterima method ini adalah Player
-        // TODO: Cetak "Player touches fairy"
+    public void update(float delta) {
+        super.update(delta);
+
+        if (collisionCooldown > 0) {
+            collisionCooldown -= delta;
+        }
     }
 
-
+    @Override
+    public void onCollision(Collidable other) {
+        if (other instanceof Player && collisionCooldown <= 0) {
+            System.out.println("Player touches fairy");
+            collisionCooldown = 1.0f;
+        }
+    }
 }
