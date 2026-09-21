@@ -1,4 +1,4 @@
-package com.RodinalMukhtarAulya.frontend.enemies;
+package com.RodinalMukhtarAulya.frontend.objects.enemies;
 
 import com.RodinalMukhtarAulya.frontend.objects.Collidable;
 import com.RodinalMukhtarAulya.frontend.objects.Player;
@@ -17,8 +17,6 @@ public class Boss extends Enemy {
 
     @Override
     public void update(float delta) {
-        super.update(delta);
-
         if (collisionCooldown > 0) {
             collisionCooldown -= delta;
         }

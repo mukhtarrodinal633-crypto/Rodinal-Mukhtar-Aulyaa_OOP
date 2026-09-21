@@ -1,6 +1,7 @@
-package com.RodinalMukhtarAulya.frontend.enemies;
+package com.RodinalMukhtarAulya.frontend.objects.enemies;
 
 
+import com.RodinalMukhtarAulya.frontend.objects.Collidable;
 import com.RodinalMukhtarAulya.frontend.objects.GameObject;
 import com.RodinalMukhtarAulya.frontend.objects.Player;
 import com.badlogic.gdx.graphics.Color;
@@ -58,4 +59,11 @@ public class Enemy extends GameObject {
 
     public long getScoreValue() { return scoreValue; }
     public void setScoreValue(long scoreValue) { this.scoreValue = scoreValue; }
+
+    @Override
+    public void onCollision(Collidable other) {
+        if (other instanceof Player) {
+            System.out.println("Player touches enemy: " + getName());
+        }
+    }
 }

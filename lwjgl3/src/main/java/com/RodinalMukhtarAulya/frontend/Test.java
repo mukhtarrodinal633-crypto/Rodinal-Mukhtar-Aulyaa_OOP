@@ -1,9 +1,9 @@
-package com.RodialMukhtarAulya.frontend.frontend;
+package com.RodinalMukhtarAulya.frontend;
 
-import com.RodinalMukhtarAulya.frontend.enemies.Boss;
-import com.RodinalMukhtarAulya.frontend.enemies.Enemy;
-import com.RodinalMukhtarAulya.frontend.enemies.Fairy;
-import com.RodinalMukhtarAulya.frontend.items.Item;
+import com.RodinalMukhtarAulya.frontend.objects.enemies.Boss;
+import com.RodinalMukhtarAulya.frontend.objects.enemies.Enemy;
+import com.RodinalMukhtarAulya.frontend.objects.enemies.Fairy;
+import com.RodinalMukhtarAulya.frontend.objects.items.Item;
 import com.RodinalMukhtarAulya.frontend.objects.Player;
 
 public class Test {

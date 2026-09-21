@@ -1,8 +1,8 @@
 package com.RodialMukhtarAulya.frontend.lwjgl3;
 
+import com.RodinalMukhtarAulya.frontend.Main;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.RodialMukhtarAulya.frontend.frontend.Main;
 
 /** Launches the desktop (LWJGL3) application. */
 public class Lwjgl3Launcher {
