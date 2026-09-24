@@ -54,33 +54,4 @@ public class Bullet extends GameObject {
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
     }
-    @Override
-    public void onCollision(Collidable other) {
-        if (other instanceof Enemy enemy) {
-            // 1. Tampilkan pesan bahwa Bullet mengenai Enemy dalam format:
-            //    Bullet hit [EnemyName] for [damage] DMG!
-            int buletShoot = damage;
-
-            if (damage >= Enemy){
-                System.out.println("Bullet Hit" + name + damage);
-            }else if (damage >= Enemy) {
-                System.out.println("Bulet Hit" + name + damage);
-            }else {
-                System.out.println("Bulet Hit" + Enemy);
-            }
-
-            // 2. Panggil takeDamage() milik Enemy dengan damage milik Bullet ini.
-            int takeDamage(){
-                return getDamage;
-            }
-            // 3. Bikin si bullet hancur (destroy) setelah mengenai Enemy, apapun hasilnya
-            //    (baik enemy kalah atau masih hidup), krn satu bullet cuma boleh kena satu target.
-            public boolean isdestroyd(){
-                return destroyd;
-            }
-
-            }
-        }
-    }
-
 }

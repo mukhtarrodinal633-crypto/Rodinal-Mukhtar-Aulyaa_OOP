@@ -35,18 +35,6 @@ public class Main extends ApplicationAdapter {
 
     private float shootCooldown = 0;
 
-    public <T extends GameObject> void updateAndClean(List<T> list, float delta, float screenWidth, float screenHeight) {
-        // 1. Dapatkan Iterator<T> dari list yang diberikan.
-
-        // 2. Selama masih ada elemen berikutnya (hasNext()):
-        //    a. Ambil elemen saat ini menggunakan next(), simpan ke variabel bertipe T.
-        //    b. Panggil update(delta) pada elemen tersebut.
-        //    c. Jika elemen tersebut isOffScreen(screenWidth, screenHeight) ATAU isDestroyed():
-        //       - Tampilkan pesan: "Removed via Generic Iterator: " + [nama class entity, pakai getClass().getSimpleName()]
-        //       - Hapus elemen ini dari list menggunakan method milik Iterator (BUKAN list.remove()!).
-    }
-
-
     @Override
     public void create() {
         shapeRenderer = new ShapeRenderer();

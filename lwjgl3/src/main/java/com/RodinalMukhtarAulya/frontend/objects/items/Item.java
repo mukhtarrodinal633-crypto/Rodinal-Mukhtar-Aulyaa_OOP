@@ -92,6 +92,4 @@ public class Item extends GameObject {
     public void onCollision(Collidable other) {
     }
 
-    public boolean isDestroyed() {
-    }
 }

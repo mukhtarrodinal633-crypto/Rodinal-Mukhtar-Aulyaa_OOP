@@ -189,13 +189,6 @@ public class Player extends GameObject {
     public long getScore() {
         return score;
     }
-    public void collectItem(Item item) {
-        if (item.isDestroyed()) return; // Mencegah item diambil dua kali di frame yang sama
-        // ... switch-case type item yang sudah kalian buat sebelumnya ...
-        // TODO: Tandai item ini sebagai destroyed agar nanti dihapus oleh Iterator
-        // Panggil method destroy() milik item di sini!
-    }
-
 
     @Override
     public void update(float delta) {
