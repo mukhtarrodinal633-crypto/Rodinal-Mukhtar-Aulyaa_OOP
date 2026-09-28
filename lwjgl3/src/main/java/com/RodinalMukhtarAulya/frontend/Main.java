@@ -2,9 +2,9 @@ package com.RodinalMukhtarAulya.frontend;
 
 import com.RodinalMukhtarAulya.frontend.objects.GameObject;
 import com.RodinalMukhtarAulya.frontend.objects.Player;
+import com.RodinalMukhtarAulya.frontend.objects.BulletType;
 import com.RodinalMukhtarAulya.frontend.objects.bullets.Bullet;
 import com.RodinalMukhtarAulya.frontend.objects.enemies.Boss;
-import com.RodinalMukhtarAulya.frontend.objects.enemies.Enemy;
 import com.RodinalMukhtarAulya.frontend.objects.enemies.Fairy;
 import com.RodinalMukhtarAulya.frontend.objects.items.Item;
 import com.RodinalMukhtarAulya.frontend.objects.items.ItemType;
@@ -15,10 +15,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.ArrayList;
-import java.util.List;
-import com.badlogic.gdx.Input;
 import java.util.Iterator;
-
+import java.util.List;
 
 public class Main extends ApplicationAdapter {
     private ShapeRenderer shapeRenderer;
@@ -31,7 +29,6 @@ public class Main extends ApplicationAdapter {
     private Item PointItem;
 
     private List<GameObject> entities;
-    private List<Bullet> bullets;
 
     private float shootCooldown = 0;
 
@@ -40,7 +37,6 @@ public class Main extends ApplicationAdapter {
         shapeRenderer = new ShapeRenderer();
 
         entities = new ArrayList<>();
-        bullets = new ArrayList<>();
 
         Player = new Player(280, 40, "Reimu Hakurei", 100, 15, 3);
 
@@ -71,6 +67,32 @@ public class Main extends ApplicationAdapter {
         entities.add(PointItem);
     }
 
+    public <T extends GameObject> void updateAndClean(
+        List<T> list,
+        float delta,
+        float screenWidth,
+        float screenHeight
+    ) {
+        Iterator<T> iterator = list.iterator();
+
+        while (iterator.hasNext()) {
+            T entity = iterator.next();
+
+            entity.update(delta);
+
+            if (entity.isOffScreen(screenWidth, screenHeight)
+                || entity.isDestroyed()) {
+
+                System.out.println(
+                    "Removed via Generic Iterator: " +
+                        entity.getClass().getSimpleName()
+                );
+
+                iterator.remove();
+            }
+        }
+    }
+
     @Override
     public void render() {
         float delta = Gdx.graphics.getDeltaTime();
@@ -79,77 +101,40 @@ public class Main extends ApplicationAdapter {
             shootCooldown -= delta;
         }
 
-        for (GameObject obj : entities) {
-            obj.update(delta);
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.Z) && shootCooldown <= 0) {
-            Bullet bullet = Player.shootBullet();
-            bullets.add(bullet);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && shootCooldown <= 0) {
+            entities.add(Player.shootBullet());
             shootCooldown = 0.2f;
         }
 
-        for (Bullet bullet : bullets) {
-            bullet.update(delta);
-        }
-
-        for (int i = 0; i < bullets.size(); i++) {
-            Bullet bullet = bullets.get(i);
-
-            if (bullet.getY() > 480) {
-                bullet.setDestroyed(true);
-                continue;
-            }
-
-            for (GameObject obj : entities) {
-                if (obj instanceof Enemy) {
-                    Enemy enemy = (Enemy) obj;
-
-                    if (enemy.isAlive() &&
-                        bullet.getCoreHitbox().overlaps(enemy.getCoreHitbox())) {
-
-                        boolean defeated = enemy.takeDamage(bullet.getDamage());
-
-                        if (defeated) {
-                            Player.addScore(enemy.getScoreValue());
-                        }
-
-                        bullet.setDestroyed(true);
-                        break;
-                    }
-                }
-            }
-        }
-
-        bullets.removeIf(Bullet::isDestroyed);
+        updateAndClean(
+            entities,
+            delta,
+            Gdx.graphics.getWidth(),
+            Gdx.graphics.getHeight()
+        );
 
         for (int i = 0; i < entities.size(); i++) {
             for (int j = i + 1; j < entities.size(); j++) {
                 GameObject a = entities.get(i);
                 GameObject b = entities.get(j);
 
-                if (a.getCoreHitbox().overlaps(b.getCoreHitbox())) {
-                    a.onCollision(b);
-                    b.onCollision(a);
+                if (!a.isDestroyed() && !b.isDestroyed()) {
+                    if (a.getCoreHitbox().overlaps(b.getCoreHitbox())) {
+                        a.onCollision(b);
+                        b.onCollision(a);
+                    }
                 }
             }
         }
-
-        entities.removeIf(obj ->
-            obj instanceof Item &&
-                ((Item) obj).isCollected()
-        );
 
         ScreenUtils.clear(0.1f, 0.1f, 0.15f, 1f);
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-        for (GameObject obj : entities) {
-            obj.render(shapeRenderer);
-        }
-
-        for (Bullet bullet : bullets) {
-            bullet.render(shapeRenderer);
+        for (GameObject entity : entities) {
+            if (!entity.isDestroyed()) {
+                entity.render(shapeRenderer);
+            }
         }
 
         shapeRenderer.end();

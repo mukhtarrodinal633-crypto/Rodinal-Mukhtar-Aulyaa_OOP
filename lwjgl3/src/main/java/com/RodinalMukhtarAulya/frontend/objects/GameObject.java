@@ -13,6 +13,7 @@ public abstract class GameObject implements Collidable {
     protected float height;
     protected float speed;
     protected Color color;
+    private boolean destroyed;
 
     public GameObject(float x, float y, float width, float height, float speed, Color color) {
         this.x = x;
@@ -21,6 +22,7 @@ public abstract class GameObject implements Collidable {
         this.height = height;
         this.speed = speed;
         this.color = color;
+        this.destroyed = false;
     }
 
     public void update(float delta) {
@@ -53,6 +55,21 @@ public abstract class GameObject implements Collidable {
     public void onCollision(Collidable other) {
     }
 
+    public boolean isDestroyed() {
+        return destroyed;
+    }
+
+    public void destroy() {
+        destroyed = true;
+    }
+
+    public boolean isOffScreen(float screenWidth, float screenHeight) {
+        return x + width < 0 ||
+            x > screenWidth ||
+            y + height < 0 ||
+            y > screenHeight;
+    }
+
     public float getX() { return x; }
     public void setX(float x) { this.x = x; }
 
@@ -60,20 +77,24 @@ public abstract class GameObject implements Collidable {
     public void setY(float y) { this.y = y; }
 
     public float getWidth() { return width; }
+
     public void setWidth(float width) {
         if (width > 0) this.width = width;
     }
 
     public float getHeight() { return height; }
+
     public void setHeight(float height) {
         if (height > 0) this.height = height;
     }
 
     public float getSpeed() { return speed; }
+
     public void setSpeed(float speed) {
         if (speed >= 0) this.speed = speed;
     }
 
     public Color getColor() { return color; }
+
     public void setColor(Color color) { this.color = color; }
 }

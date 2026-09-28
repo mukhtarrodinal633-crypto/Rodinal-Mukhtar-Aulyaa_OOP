@@ -73,6 +73,8 @@ public class Player extends GameObject {
     }
 
     public void collectItem(Item item) {
+        if (item.isDestroyed()) return;
+
         ItemType type = item.getItemTypeEnum();
 
         if (type != null) {
@@ -115,6 +117,8 @@ public class Player extends GameObject {
                     break;
             }
         }
+
+        item.destroy();
     }
 
     public void takeDamage(int damage) {
@@ -214,9 +218,8 @@ public class Player extends GameObject {
         if (other instanceof Item) {
             Item item = (Item) other;
 
-            if (!item.isCollected()) {
+            if (!item.isDestroyed()) {
                 collectItem(item);
-                item.setCollected(true);
             }
         }
     }
