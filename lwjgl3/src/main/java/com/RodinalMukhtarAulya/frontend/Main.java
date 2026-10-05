@@ -2,16 +2,17 @@ package com.RodinalMukhtarAulya.frontend;
 
 import com.RodinalMukhtarAulya.frontend.objects.GameObject;
 import com.RodinalMukhtarAulya.frontend.objects.Player;
-import com.RodinalMukhtarAulya.frontend.objects.BulletType;
-import com.RodinalMukhtarAulya.frontend.objects.bullets.Bullet;
 import com.RodinalMukhtarAulya.frontend.objects.enemies.Boss;
 import com.RodinalMukhtarAulya.frontend.objects.enemies.Fairy;
 import com.RodinalMukhtarAulya.frontend.objects.items.Item;
 import com.RodinalMukhtarAulya.frontend.objects.items.ItemType;
+import com.RodinalMukhtarAulya.frontend.Systems.AssetManager;
+import com.RodinalMukhtarAulya.frontend.Systems.EntityFactory;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Main extends ApplicationAdapter {
-    private ShapeRenderer shapeRenderer;
+
+    private SpriteBatch batch;
 
     private Player Player;
     private Fairy Fairy;
@@ -34,30 +36,53 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void create() {
-        shapeRenderer = new ShapeRenderer();
+        batch = new SpriteBatch();
+
+        AssetManager.getInstance().init();
 
         entities = new ArrayList<>();
 
-        Player = new Player(280, 40, "Reimu Hakurei", 100, 15, 3);
-
-        Fairy = new Fairy(150, 380, "Stage 1 Fairy", 20);
-
-        Boss = new Boss(380, 400, "Cirno", 150);
-
-        PowerItem = new Item(
-            200, 300,
-            16, 16,
-            0,
-            ItemType.POWER,
-            500L
+        Player = EntityFactory.createPlayer(
+            280,
+            40,
+            "Reimu Hakurei",
+            100,
+            15,
+            3
         );
 
-        PointItem = new Item(
-            320, 250,
-            16, 16,
-            0,
-            ItemType.POINT,
-            1000L
+        Fairy = EntityFactory.createFairy(
+            150,
+            380,
+            "Red Fairy",
+            20
+        );
+
+        Fairy = EntityFactory.createFairy(
+            250,
+            380,
+            "Blue Fairy",
+            20,
+            "fairy_idle_blue"
+        );
+
+        Boss = EntityFactory.createBoss(
+            380,
+            400,
+            "Rumia",
+            150
+        );
+
+        PowerItem = EntityFactory.createItem(
+            200,
+            450,
+            ItemType.POWER
+        );
+
+        PointItem = EntityFactory.createItem(
+            320,
+            480,
+            ItemType.POINT
         );
 
         entities.add(Player);
@@ -129,21 +154,23 @@ public class Main extends ApplicationAdapter {
 
         ScreenUtils.clear(0.1f, 0.1f, 0.15f, 1f);
 
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        batch.begin();
 
         for (GameObject entity : entities) {
             if (!entity.isDestroyed()) {
-                entity.render(shapeRenderer);
+                entity.render(batch);
             }
         }
 
-        shapeRenderer.end();
+        batch.end();
     }
 
     @Override
     public void dispose() {
-        if (shapeRenderer != null) {
-            shapeRenderer.dispose();
+        if (batch != null) {
+            batch.dispose();
         }
+
+        AssetManager.getInstance().dispose();
     }
 }

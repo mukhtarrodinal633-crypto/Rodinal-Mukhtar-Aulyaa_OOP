@@ -1,6 +1,5 @@
 package com.RodinalMukhtarAulya.frontend.objects.bullets;
 
-import com.RodinalMukhtarAulya.frontend.objects.BulletType;
 import com.RodinalMukhtarAulya.frontend.objects.Collidable;
 import com.RodinalMukhtarAulya.frontend.objects.GameObject;
 import com.RodinalMukhtarAulya.frontend.objects.enemies.Enemy;

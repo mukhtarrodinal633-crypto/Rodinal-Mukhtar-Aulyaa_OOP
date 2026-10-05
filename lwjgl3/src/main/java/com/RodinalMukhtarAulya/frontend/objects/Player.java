@@ -1,14 +1,20 @@
 package com.RodinalMukhtarAulya.frontend.objects;
 
+import com.RodinalMukhtarAulya.frontend.Systems.AssetManager;
+import com.RodinalMukhtarAulya.frontend.objects.bullets.BulletType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.RodinalMukhtarAulya.frontend.objects.bullets.Bullet;
 import com.RodinalMukhtarAulya.frontend.objects.enemies.Enemy;
 import com.RodinalMukhtarAulya.frontend.objects.items.Item;
 import com.RodinalMukhtarAulya.frontend.objects.items.ItemType;
-
-import static com.badlogic.gdx.Gdx.input;
 
 public class Player extends GameObject {
     public String name;
@@ -45,13 +51,22 @@ public class Player extends GameObject {
             getName() + " shoots bullet dealing " + damage + " DMG!"
         );
 
-        return new Bullet(
+        Bullet bullet = new Bullet(
             x + width / 2 - 4,
             y + height,
             400f,
             BulletType.DANMAKU,
             damage
         );
+
+        // Mengambil sprite peluru dari AssetManager
+        TextureRegion bulletSprite =
+            AssetManager.getInstance().getTextureRegion("player_bullet");
+
+        // Memasang sprite ke Bullet
+        bullet.setSprite(bulletSprite);
+
+        return bullet;
     }
 
     public void shoot(Enemy target) {
@@ -193,6 +208,13 @@ public class Player extends GameObject {
     public long getScore() {
         return score;
     }
+    public Bullet shootBullet() {
+        int damage = 10 + power;
+        System.out.println(name + " shoots bullet dealing " + damage + " DMG!");
+        // TODO: Kembalikan Bullet menggunakan EntityFactory
+        // dengan rumus x, y sesuai dengan implementasi sebelumnya.
+    }
+
 
     @Override
     public void update(float delta) {
@@ -223,5 +245,4 @@ public class Player extends GameObject {
             }
         }
     }
-
 }

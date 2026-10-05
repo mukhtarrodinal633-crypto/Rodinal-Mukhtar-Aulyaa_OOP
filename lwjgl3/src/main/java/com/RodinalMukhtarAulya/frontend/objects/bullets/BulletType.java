@@ -1,4 +1,4 @@
-package com.RodinalMukhtarAulya.frontend.objects;
+package com.RodinalMukhtarAulya.frontend.objects.bullets;
 
 public enum BulletType {
     DANMAKU,

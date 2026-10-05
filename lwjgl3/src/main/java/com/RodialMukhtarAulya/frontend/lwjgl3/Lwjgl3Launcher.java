@@ -6,7 +6,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
 /** Launches the desktop (LWJGL3) application. */
 public class Lwjgl3Launcher {
-    public static void main(String[] args) {
+   public static void main(String[] args) {
         // Line StartupHelper dihapus untuk mengatasi error 'cannot find symbol'
         createApplication();
     }
