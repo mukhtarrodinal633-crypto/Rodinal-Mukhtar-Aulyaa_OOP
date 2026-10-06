@@ -1,6 +1,7 @@
 package com.RodinalMukhtarAulya.frontend.objects;
 
 import com.RodinalMukhtarAulya.frontend.Systems.AssetManager;
+import com.RodinalMukhtarAulya.frontend.Systems.EntityFactory;
 import com.RodinalMukhtarAulya.frontend.objects.bullets.BulletType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -24,8 +25,10 @@ public class Player extends GameObject {
 
     private long score;
 
+    private int currentDir = 0;
+
     public Player(String name, int hp, int power, int spellCards) {
-        super(280, 40, 32, 32, 200, Color.RED);
+        super(280, 40, 32, 48, 200, Color.RED);
 
         this.name = name;
         this.hp = hp;
@@ -35,7 +38,7 @@ public class Player extends GameObject {
     }
 
     public Player(float x, float y, String name, int hp, int power, int spellCards) {
-        super(x, y, 32, 32, 200, Color.RED);
+        super(x, y, 32, 48, 200, Color.RED);
 
         this.name = name;
         this.hp = hp;
@@ -51,29 +54,19 @@ public class Player extends GameObject {
             getName() + " shoots bullet dealing " + damage + " DMG!"
         );
 
-        Bullet bullet = new Bullet(
-            x + width / 2 - 4,
+        return EntityFactory.createPlayerBullet(
+            x + width / 2 - 8,
             y + height,
-            400f,
-            BulletType.DANMAKU,
             damage
         );
-
-        // Mengambil sprite peluru dari AssetManager
-        TextureRegion bulletSprite =
-            AssetManager.getInstance().getTextureRegion("player_bullet");
-
-        // Memasang sprite ke Bullet
-        bullet.setSprite(bulletSprite);
-
-        return bullet;
     }
 
     public void shoot(Enemy target) {
         int damage = 10 + getPower();
 
         System.out.println(
-            getName() + " shoots " +
+            getName() +
+                " shoots " +
                 target.getName() +
                 " dealing " +
                 damage +
@@ -208,30 +201,104 @@ public class Player extends GameObject {
     public long getScore() {
         return score;
     }
-    public Bullet shootBullet() {
-        int damage = 10 + power;
-        System.out.println(name + " shoots bullet dealing " + damage + " DMG!");
-        // TODO: Kembalikan Bullet menggunakan EntityFactory
-        // dengan rumus x, y sesuai dengan implementasi sebelumnya.
-    }
-
 
     @Override
     public void update(float delta) {
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+        // TODO 1: panggil update(delta) milik GameObject melalui super.
+        super.update(delta);
+
+        // TODO 2: Siapkan variabel lokal float dx dengan nilai awal 0
+        // (dx = delta x, mencatat perubahan arah horizontal untuk animasi)
+        float dx = 0;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.W) ||
+            Gdx.input.isKeyPressed(Input.Keys.UP)) {
             y += speed * delta;
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.S) ||
+            Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             y -= speed * delta;
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A) ||
+            Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             x -= speed * delta;
+
+            // TODO 3: Ganti nilai dx sesuai dengan arahnya.
+            // (Kalau ke kiri, maka dx ke mana ya?)
+            dx = -1;
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.D) ||
+            Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             x += speed * delta;
+
+            // TODO 4: Ganti nilai dx sesuai dengan arahnya.
+            // (Kalau ke kanan, maka dx ke mana ya?)
+            dx = 1;
+        }
+
+        // TODO 5: Panggil updateAnimationState(dx)
+        updateAnimationState(dx);
+    }
+
+    public void updateAnimationState(float dx) {
+        AssetManager assets = AssetManager.getInstance();
+
+        if (dx < 0) {
+            // TODO:
+            // 1. Lanjutkan perubahan hanya jika currentDir bukan -1.
+            // 2. Ubah currentDir menjadi -1.
+            // 3. Ambil animasi "player_left" melalui assets.getAnimation(...).
+            //    Simpan pada variabel lokal bertipe Animation<TextureRegion> bernama anim.
+            // 4. Jika anim tidak null, pasang anim melalui setAnimation(...).
+            if (currentDir != -1) {
+                currentDir = -1;
+
+                Animation<TextureRegion> anim =
+                    assets.getAnimation("player_left");
+
+                if (anim != null) {
+                    setAnimation(anim);
+                }
+            }
+
+        } else if (dx > 0) {
+            // TODO:
+            // 1. Lanjutkan perubahan hanya jika currentDir bukan 1.
+            // 2. Ubah currentDir menjadi 1.
+            // 3. Ambil animasi "player_right" melalui assets.getAnimation(...).
+            //    Simpan pada variabel lokal bertipe Animation<TextureRegion> bernama anim.
+            // 4. Jika anim tidak null, pasang anim melalui setAnimation(...).
+            if (currentDir != 1) {
+                currentDir = 1;
+
+                Animation<TextureRegion> anim =
+                    assets.getAnimation("player_right");
+
+                if (anim != null) {
+                    setAnimation(anim);
+                }
+            }
+
+        } else {
+            // TODO:
+            // 1. Lanjutkan perubahan hanya jika currentDir bukan 0.
+            // 2. Ubah currentDir menjadi 0.
+            // 3. Ambil animasi "player_idle" melalui assets.getAnimation(...).
+            //    Simpan pada variabel lokal bertipe Animation<TextureRegion> bernama anim.
+            // 4. Jika anim tidak null, pasang anim melalui setAnimation(...).
+            if (currentDir != 0) {
+                currentDir = 0;
+
+                Animation<TextureRegion> anim =
+                    assets.getAnimation("player_idle");
+
+                if (anim != null) {
+                    setAnimation(anim);
+                }
+            }
         }
     }
 

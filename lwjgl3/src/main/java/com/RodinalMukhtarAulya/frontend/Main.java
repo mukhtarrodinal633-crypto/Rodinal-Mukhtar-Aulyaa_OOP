@@ -24,7 +24,8 @@ public class Main extends ApplicationAdapter {
     private SpriteBatch batch;
 
     private Player Player;
-    private Fairy Fairy;
+    private Fairy FairyRed;
+    private Fairy FairyBlue;
     private Boss Boss;
 
     private Item PowerItem;
@@ -51,14 +52,14 @@ public class Main extends ApplicationAdapter {
             3
         );
 
-        Fairy = EntityFactory.createFairy(
+        FairyRed = EntityFactory.createFairy(
             150,
             380,
             "Red Fairy",
             20
         );
 
-        Fairy = EntityFactory.createFairy(
+        FairyBlue = EntityFactory.createFairy(
             250,
             380,
             "Blue Fairy",
@@ -81,12 +82,13 @@ public class Main extends ApplicationAdapter {
 
         PointItem = EntityFactory.createItem(
             320,
-            480,
+            464,
             ItemType.POINT
         );
 
         entities.add(Player);
-        entities.add(Fairy);
+        entities.add(FairyRed);
+        entities.add(FairyBlue);
         entities.add(Boss);
         entities.add(PowerItem);
         entities.add(PointItem);

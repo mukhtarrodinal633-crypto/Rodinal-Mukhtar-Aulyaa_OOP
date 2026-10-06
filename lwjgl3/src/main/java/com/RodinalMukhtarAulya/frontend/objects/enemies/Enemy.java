@@ -60,7 +60,6 @@ public class Enemy extends GameObject {
         return this.hp > 0;
     }
 
-    // Encapsulation getters and setters
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 

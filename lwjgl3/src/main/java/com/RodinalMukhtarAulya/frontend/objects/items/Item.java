@@ -11,29 +11,29 @@ public class Item extends GameObject {
     private boolean collected = false;
 
     public Item(float x, float y, String itemType) {
-        super(x, y, 16, 16, 0, Color.WHITE);
+        super(x, y, 16, 16, 100f, Color.WHITE);
         this.itemType = itemType;
         this.scoreValue = 1000L;
     }
 
     public Item(float x, float y, float width, float height, float speed, String itemType) {
-        super(x, y, width, height, 0, Color.WHITE);
+        super(x, y, width, height, speed, Color.WHITE);
         this.itemType = itemType;
         this.scoreValue = 1000L;
     }
 
     public Item(float x, float y, float width, float height, float speed, String itemType, long scoreValue) {
-        super(x, y, width, height, 0, Color.WHITE);
+        super(x, y, width, height, speed, Color.WHITE);
         this.itemType = itemType;
         this.scoreValue = scoreValue;
     }
 
     public Item(float x, float y, ItemType itemTypeEnum) {
-        this(x, y, 16, 16, 0, itemTypeEnum, itemTypeEnum.getScoreValue());
+        this(x, y, 16, 16, 100f, itemTypeEnum, itemTypeEnum.getScoreValue());
     }
 
     public Item(float x, float y, float width, float height, float speed, ItemType itemTypeEnum, long scoreValue) {
-        super(x, y, width, height, 0, getItemColor(itemTypeEnum));
+        super(x, y, width, height, speed, getItemColor(itemTypeEnum));
 
         this.itemTypeEnum = itemTypeEnum;
         this.itemType = itemTypeEnum.name();
@@ -61,7 +61,8 @@ public class Item extends GameObject {
 
     @Override
     public void update(float delta) {
-        // Item tetap diam
+        super.update(delta);
+        y -= speed * delta;
     }
 
     public String getItemType() {

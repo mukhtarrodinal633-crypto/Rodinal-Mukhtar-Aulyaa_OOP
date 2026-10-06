@@ -257,17 +257,23 @@ public class AssetManager {
             48,
             0,
             0,
-            0.125f
+            8,
+            0.125f,
+            Animation.PlayMode.LOOP
         );
+
         registerAnimationFromSheet(
             "player_left",
-            "palayer.png",
+            "player.png",
             32,
             48,
             1,
             0,
-            0.12f
+            4,
+            0.12f,
+            Animation.PlayMode.LOOP
         );
+
         registerAnimationFromSheet(
             "player_right",
             "player.png",
@@ -275,7 +281,9 @@ public class AssetManager {
             48,
             2,
             0,
-            0.12f
+            4,
+            0.12f,
+            Animation.PlayMode.LOOP
         );
 
         // TODO: Mendaftarkan animasi idle Boss (rumia.png: ukuran 64x64 per sel)
@@ -285,8 +293,10 @@ public class AssetManager {
             64,
             64,
             0,
+            0,
             4,
-            0.2f
+            0.2f,
+            Animation.PlayMode.LOOP
         );
 
         registerAnimationFromSheet(
@@ -296,7 +306,9 @@ public class AssetManager {
             64,
             1,
             0,
-            0.15f
+            4,
+            0.15f,
+            Animation.PlayMode.REVERSED
         );
 
         registerAnimationFromSheet(
@@ -304,9 +316,11 @@ public class AssetManager {
             "rumia.png",
             64,
             64,
-            3,
+            2,
             0,
-            0.125f
+            4,
+            0.15f,
+            Animation.PlayMode.NORMAL
         );
 
         // TODO: Mendaftarkan animasi Fairy
@@ -317,7 +331,9 @@ public class AssetManager {
             32,
             1,
             0,
-            0.125f
+            8,
+            0.125f,
+            Animation.PlayMode.LOOP
         );
 
         registerAnimationFromSheet(
@@ -327,18 +343,12 @@ public class AssetManager {
             32,
             0,
             0,
-            0.125f
+            8,
+            0.125f,
+            Animation.PlayMode.LOOP
         );
 
         // TODO: Mendaftarkan peluru musuh (bullets_small.png: petak 16x16 baris 2 kolom 3)
-        registerRegionFromSheet(
-            "bullet_danmaku",
-            "bullets_small.png",
-            16,
-            16,
-            2,
-            3
-        );
 
         registerRegionFromSheet(
             "bullet_amulet",
@@ -358,13 +368,21 @@ public class AssetManager {
             0
         );
 
+        registerRegionFromSheet(
+            "bullet_danmaku",
+            "bullets_small.png",
+            16,
+            16,
+            2,
+            3
+        );
+
         // TODO: Mendaftarkan 4 variasi Item (items.png: ukuran 16x16 per petak)
         registerRegionFromSheet("item_power", "items.png", 16, 16, 0, 0);
         registerRegionFromSheet("item_point", "items.png", 16, 16, 0, 1);
         registerRegionFromSheet("item_bomb", "items.png", 16, 16, 0, 3);
         registerRegionFromSheet("item_life", "items.png", 16, 16, 0, 5);
 
-        // Mendaftarkan sprite peluru Player
         Texture bulletTexture = loadTexture("amulet_reimu.png");
 
         if (bulletTexture != null) {

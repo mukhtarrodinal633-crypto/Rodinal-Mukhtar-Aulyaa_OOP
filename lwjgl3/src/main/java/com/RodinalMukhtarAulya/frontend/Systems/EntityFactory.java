@@ -55,12 +55,13 @@ public class EntityFactory {
         // TODO 2:
         // Buat Bullet baru dengan x, y, BulletType.AMULET, dan damage;
         // simpan pada variabel lokal `bullet`.
-        Bullet bullet = new Bullet(x, y, 0f, BulletType.AMULET, damage);
+        Bullet bullet = new Bullet(x, y, 400f, BulletType.AMULET, damage);
 
         // TODO 3:
         // Pasang sprite pada bullet melalui bullet.setSprite(...).
         TextureRegion sprite =
-            AssetManager.getInstance().getTextureRegion("bullet,amulet");
+            AssetManager.getInstance().getTextureRegion(spriteKey);
+
         bullet.setSprite(sprite);
 
         // TODO 4:
@@ -71,33 +72,36 @@ public class EntityFactory {
     public static Bullet createPlayerBullet(float x, float y, int damage) {
         // TODO 5:
         // Kembalikan hasil call function createPlayerBullet sebelumnya tapi dengan parameter spriteKey diganti dengan "bullet_amulet".
-
+        return createPlayerBullet(x, y, damage, "bullet_amulet");
     }
-
 
     // Membuat Fairy dan memasang animasi 'fairy_idle' dari AssetManager
     public static Fairy createFairy(float x, float y, String name, int hp) {
         Fairy fairy = new Fairy(x, y, name, hp);
 
         Animation<TextureRegion> anim =
-            AssetManager.getInstance().getAnimation("fairy_idle");
+            AssetManager.getInstance().getAnimation("fairy_idle_red");
 
         fairy.setAnimation(anim);
 
         return fairy;
     }
+
     public static Fairy createFairy(float x, float y, String name, int hp, String keyString) {
         // TODO:
         // 1. Buat Fairy baru dengan x, y, name, dan hp dari parameter;
         //    simpan pada variabel lokal bernama `fairy`.
         Fairy fairy = new Fairy(x, y, name, hp);
+
         // 2. Ambil animasi untuk keyString melalui getAnimation(...)
         //    dari AssetManager.getInstance(). Simpan hasilnya pada
         //    variabel lokal bernama `idleAnim`.
-        Animation<TextureRegion> anim =
-            AssetManager.getInstance(). getAnimation("New_Fairy");
+        Animation<TextureRegion> idleAnim =
+            AssetManager.getInstance().getAnimation(keyString);
+
         // 3. Pasang idleAnim pada fairy melalui fairy.setAnimation(...).
-        fairy.setAnimation(anim);
+        fairy.setAnimation(idleAnim);
+
         // 4. Kembalikan fairy.
         return fairy;
     }
